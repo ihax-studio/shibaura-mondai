@@ -2,1120 +2,990 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>芝浦工大合格 - 数学&化学 問題集</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>芝浦工大 化学 2日で完璧</title>
+<script type="module">
+import { haptic } from 'https://esm.sh/ios-haptics'
+window.h = haptic
+window.hc = haptic.confirm
+window.he = haptic.error
+</script>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-  background: #f0f4f8;
-  color: #1a1a2e;
-  line-height: 1.8;
-  padding: 20px;
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Hiragino Kaku Gothic ProN',system-ui,sans-serif;
+  background:#0d1117;color:#e6edf3;
+  line-height:1.85;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none;user-select:none;
+  padding-bottom:80px;
 }
-.container { max-width: 900px; margin: 0 auto; }
-h1 {
-  text-align: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 30px 20px;
-  border-radius: 16px;
-  margin-bottom: 30px;
-  font-size: 1.8em;
+.wrap{max-width:720px;margin:0 auto;padding:10px 14px}
+
+/* ヘッダー */
+.hdr{
+  text-align:center;padding:24px 16px 18px;
+  background:linear-gradient(135deg,#1a73e8,#7c3aed);
+  position:sticky;top:0;z-index:100;
 }
-h1 small { display: block; font-size: 0.5em; opacity: 0.9; margin-top: 8px; }
-h2 {
-  background: #667eea;
-  color: white;
-  padding: 15px 20px;
-  border-radius: 12px 12px 0 0;
-  font-size: 1.3em;
-  margin-top: 40px;
-}
-.section-intro {
-  background: #e8eaf6;
-  padding: 20px;
-  border-radius: 0 0 12px 12px;
-  margin-bottom: 20px;
-  border-left: 4px solid #667eea;
+.hdr h1{font-size:1.35em;color:#fff;letter-spacing:.5px}
+.hdr .sub{font-size:.72em;color:rgba(255,255,255,.65);margin-top:2px}
+.hdr .day-tag{
+  display:inline-block;margin-top:8px;
+  background:rgba(255,255,255,.2);color:#fff;
+  padding:4px 14px;border-radius:20px;font-size:.75em;font-weight:700;
 }
 
-/* 公式ボックス */
-.formula-box {
-  background: linear-gradient(135deg, #fff9c4, #fff3e0);
-  border: 2px solid #ffb74d;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 15px 0;
+/* モード切替 */
+.mode-sw{
+  display:flex;margin:14px 0;
+  border-radius:12px;overflow:hidden;
+  border:2px solid #30363d;
 }
-.formula-box h3 {
-  color: #e65100;
-  margin-bottom: 10px;
-  font-size: 1.1em;
+.mode-btn{
+  flex:1;padding:13px;text-align:center;
+  font-weight:700;font-size:.95em;
+  background:#161b22;color:#8b949e;
+  border:none;cursor:pointer;transition:all .15s;
 }
-.formula-box .formula {
-  background: white;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 1.1em;
-  text-align: center;
-  margin: 8px 0;
-  font-weight: bold;
-  border: 1px solid #ffe0b2;
+.mode-btn.on{background:#1a73e8;color:#fff}
+
+/* セクションナビ */
+.snav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.sbtn{
+  padding:7px 14px;border-radius:18px;
+  background:#21262d;color:#8b949e;
+  border:1px solid #30363d;font-size:.8em;
+  font-weight:600;cursor:pointer;transition:all .15s;
 }
-.formula-box .explain {
-  font-size: 0.9em;
-  color: #5d4037;
-  margin-top: 5px;
+.sbtn.on{background:#238636;color:#fff;border-color:#238636}
+
+/* 進捗バー */
+.progress-bar{
+  height:4px;background:#21262d;border-radius:4px;margin:10px 0 16px;overflow:hidden;
+}
+.progress-fill{height:100%;background:linear-gradient(90deg,#238636,#3fb950);width:0%;transition:width .4s}
+
+/* INPUT カード */
+.icard{
+  background:#161b22;border:1px solid #30363d;
+  border-radius:14px;padding:18px;margin:12px 0;
+}
+.icard h3{
+  color:#58a6ff;font-size:1.05em;margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.itag{
+  font-size:.65em;padding:2px 9px;border-radius:8px;
+  font-weight:700;color:#fff;
+}
+.itag.basic{background:#1a73e8}
+.itag.key{background:#da3633}
+.itag.mem{background:#8957e5}
+.itag.calc{background:#d29922}
+
+.know{
+  background:#0d1117;border-radius:10px;padding:14px;
+  margin:8px 0;border-left:3px solid #58a6ff;
+}
+.know p{margin:5px 0;font-size:.92em}
+
+.fl{
+  background:#1c2333;padding:9px 12px;border-radius:8px;
+  margin:7px 0;font-weight:700;text-align:center;
+  font-size:1em;color:#79c0ff;border:1px solid #30363d;
+}
+.fw{font-size:.78em;color:#8b949e;text-align:center;margin-top:1px;margin-bottom:6px}
+
+/* 心理学: チャンク化ボックス */
+.chunk{
+  background:#1c1c3a;border:1px dashed #8957e5;
+  border-radius:10px;padding:12px;margin:10px 0;
+}
+.chunk h4{color:#d2a8ff;font-size:.85em;margin-bottom:6px}
+.chunk p{font-size:.88em;color:#c9d1d9}
+
+/* 語呂合わせ */
+.goro{
+  background:linear-gradient(135deg,#2d1b4e,#1a1a3e);
+  border:1px solid #8957e5;border-radius:10px;
+  padding:12px 14px;margin:8px 0;text-align:center;
+}
+.goro .big{font-size:1.15em;font-weight:700;color:#d2a8ff;letter-spacing:1px}
+.goro .small{font-size:.78em;color:#8b949e;margin-top:3px}
+
+/* 読み上げボタン */
+.speak{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:#21262d;border:1px solid #30363d;
+  color:#58a6ff;padding:10px;border-radius:10px;
+  font-size:.88em;cursor:pointer;margin-top:10px;
+  width:100%;font-weight:600;transition:all .15s;
+}
+.speak:active{transform:scale(.97)}
+.speak.on{background:#1a73e8;color:#fff;border-color:#1a73e8}
+
+/* OUTPUT: 前提クイズ */
+.pre-quiz{
+  background:#1a1a2e;border:1px solid #d29922;
+  border-radius:12px;padding:16px;margin:12px 0;
+}
+.pre-quiz h4{color:#d29922;font-size:.95em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.pre-quiz p{font-size:.9em;margin:4px 0}
+.hint-btn{
+  background:#d29922;color:#000;border:none;
+  padding:6px 14px;border-radius:8px;font-size:.8em;
+  font-weight:700;cursor:pointer;margin-top:8px;
+}
+.hint-box{
+  background:#21262d;border-radius:8px;padding:10px;
+  margin-top:8px;font-size:.88em;color:#e3b341;display:none;
+}
+.hint-box.show{display:block}
+
+/* OUTPUT: 問題カード */
+.qcard{
+  background:#161b22;border:1px solid #30363d;
+  border-radius:14px;margin:12px 0;overflow:hidden;
+}
+.qhd{
+  background:#21262d;padding:12px 16px;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+}
+.qnum{
+  background:#7c3aed;color:#fff;font-size:.7em;
+  padding:3px 10px;border-radius:8px;font-weight:700;
+}
+.qhd h3{color:#e6edf3;font-size:.95em;font-weight:600}
+.qbd{padding:16px}
+.qbd p{margin:5px 0;font-size:.92em}
+
+.ans-btn{
+  background:#238636;color:#fff;border:none;
+  padding:11px;border-radius:10px;width:100%;
+  font-weight:700;font-size:.92em;cursor:pointer;
+  margin-top:12px;transition:all .15s;
+}
+.ans-btn:active{transform:scale(.97)}
+
+.kai{
+  background:#0d1117;border:1px solid #238636;
+  border-radius:10px;padding:14px;margin-top:10px;display:none;
+}
+.kai.show{display:block}
+.stp{
+  background:#161b22;border-radius:8px;padding:10px 12px;
+  margin:6px 0;border-left:3px solid #238636;font-size:.9em;
+}
+.stp strong{color:#3fb950}
+.ans-final{
+  background:#238636;color:#fff;padding:10px;
+  border-radius:8px;text-align:center;font-weight:700;
+  margin-top:8px;font-size:.95em;
 }
 
-/* 問題カード */
-.mondai {
-  background: white;
-  border-radius: 12px;
-  padding: 25px;
-  margin: 20px 0;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  border-left: 5px solid #667eea;
+.memo textarea{
+  width:100%;background:#0d1117;color:#e6edf3;
+  border:1px solid #30363d;border-radius:8px;
+  padding:10px;font-size:.88em;resize:vertical;
+  min-height:50px;font-family:inherit;line-height:1.5;
+  margin-top:10px;
 }
-.mondai h3 {
-  color: #667eea;
-  font-size: 1.2em;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.mondai-num {
-  background: #667eea;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.85em;
-}
-.mondai p { margin: 8px 0; }
+.memo textarea::placeholder{color:#484f58}
 
-/* 表 */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 15px 0;
-  font-size: 0.95em;
-}
-th, td {
-  border: 1px solid #bbb;
-  padding: 8px 12px;
-  text-align: center;
-}
-th { background: #e3e8f0; font-weight: bold; }
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.88em}
+th,td{border:1px solid #30363d;padding:6px 8px;text-align:center}
+th{background:#21262d;color:#58a6ff;font-size:.85em}
 
-/* 解説 */
-.kaisetsu {
-  background: #e8f5e9;
-  border: 2px solid #66bb6a;
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 15px;
-}
-.kaisetsu h4 {
-  color: #2e7d32;
-  margin-bottom: 10px;
-  font-size: 1.1em;
-}
-.kaisetsu .step {
-  background: white;
-  border-radius: 8px;
-  padding: 12px 15px;
-  margin: 8px 0;
-  border-left: 3px solid #66bb6a;
-}
-.kaisetsu .step strong { color: #2e7d32; }
-.kaisetsu .answer {
-  background: #c8e6c9;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 1.1em;
-  text-align: center;
-  margin-top: 10px;
-}
-
-/* 選択肢 */
-.choices {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin: 10px 0;
-}
-.choices div {
-  background: #f5f5f5;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-/* ポイント */
-.point {
-  background: #fce4ec;
-  border: 2px solid #e91e63;
-  border-radius: 12px;
-  padding: 15px;
-  margin: 10px 0;
-}
-.point h4 { color: #c2185b; margin-bottom: 8px; }
-
-/* 図 */
-.fig-container {
-  text-align: center;
-  margin: 15px 0;
-}
-.electron-shell {
-  display: inline-block;
-  margin: 10px;
-  text-align: center;
-}
-
-/* タブナビ */
-.tab-nav {
-  display: flex;
-  gap: 10px;
-  margin: 20px 0;
-  flex-wrap: wrap;
-}
-.tab-btn {
-  padding: 10px 20px;
-  border: 2px solid #667eea;
-  border-radius: 30px;
-  background: white;
-  color: #667eea;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s;
-}
-.tab-btn:hover, .tab-btn.active {
-  background: #667eea;
-  color: white;
-}
-
-/* toggle解説 */
-.toggle-btn {
-  background: #66bb6a;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1em;
-  margin-top: 10px;
-}
-.toggle-btn:hover { background: #4caf50; }
-.hidden { display: none; }
-
-/* responsive */
-@media (max-width: 600px) {
-  body { padding: 10px; }
-  .choices { grid-template-columns: 1fr; }
-  h1 { font-size: 1.3em; padding: 20px 15px; }
-}
+.hidden{display:none}
 </style>
 </head>
 <body>
-<div class="container">
 
-<h1>
-  芝浦工大 合格への道
-  <small>数学(データの分析) & 化学基礎・化学 問題集</small>
-</h1>
-
-<div class="tab-nav">
-  <button class="tab-btn active" onclick="showSection('math')">数学：データの分析</button>
-  <button class="tab-btn" onclick="showSection('chem1')">化学：原子・周期表</button>
-  <button class="tab-btn" onclick="showSection('chem2')">化学：化学結合</button>
-  <button class="tab-btn" onclick="showSection('chem3')">化学：mol計算</button>
-  <button class="tab-btn" onclick="showSection('chem4')">化学：酸化還元・電池</button>
-  <button class="tab-btn" onclick="showSection('chem5')">化学：結晶・気体</button>
+<div class="hdr">
+  <h1>芝浦工大 化学</h1>
+  <div class="sub">通学 INPUT / OUTPUT</div>
+  <div class="day-tag" id="dayTag">DAY 1 / 2</div>
 </div>
 
-<!-- ============================================ -->
-<!-- 数学：データの分析 -->
-<!-- ============================================ -->
-<div id="math" class="section">
+<div class="wrap">
 
-<h2>数学I データの分析</h2>
-<div class="section-intro">
-  <strong>芝浦工大入試で出る！</strong> データの分析はセンター・共通テストでほぼ毎年出題。平均値、分散、標準偏差、相関係数を確実に押さえよう。
+<div class="mode-sw">
+  <button class="mode-btn on" id="mbI" onclick="swMode('I')">INPUT 知識</button>
+  <button class="mode-btn" id="mbO" onclick="swMode('O')">OUTPUT 問題</button>
 </div>
 
-<!-- 公式まとめ -->
-<div class="formula-box">
-  <h3>必須公式まとめ（これだけ覚えろ！）</h3>
-
-  <div class="formula">平均値 x̄ = (x₁ + x₂ + ... + xₙ) / n</div>
-  <div class="explain">→ 全部足して、個数で割るだけ！</div>
-
-  <div class="formula">分散 s² = (1/n)Σ(xᵢ - x̄)² = x²の平均 - (平均)²</div>
-  <div class="explain">→「各データと平均の差」を2乗して平均する。または「2乗の平均 ひく 平均の2乗」のほうが計算ラク！</div>
-
-  <div class="formula">標準偏差 s = √(分散)</div>
-  <div class="explain">→ 分散のルートを取るだけ！データのバラつき具合を表す。</div>
-
-  <div class="formula">共分散 sxy = (1/n)Σ(xᵢ - x̄)(yᵢ - ȳ) = xyの平均 - x̄ · ȳ</div>
-  <div class="explain">→ xとyの関係の強さ。プラスなら正の相関、マイナスなら負の相関。</div>
-
-  <div class="formula">相関係数 r = sxy / (sx · sy)　（−1 ≤ r ≤ 1）</div>
-  <div class="explain">→ 1に近い＝強い正の相関、−1に近い＝強い負の相関、0に近い＝相関なし</div>
-
-  <div class="formula">データ変換：u = ax + b のとき → ū = ax̄ + b、su = |a|·sx</div>
-  <div class="explain">→ 平均は a倍して b を足す。標準偏差は |a| 倍するだけ（bは関係なし）</div>
+<div class="snav" id="secNav">
+  <button class="sbtn on" data-s="1" onclick="swSec('1',this)">原子・周期表</button>
+  <button class="sbtn" data-s="2" onclick="swSec('2',this)">化学結合・製錬</button>
+  <button class="sbtn" data-s="3" onclick="swSec('3',this)">mol・濃度</button>
+  <button class="sbtn" data-s="4" onclick="swSec('4',this)">酸化還元</button>
+  <button class="sbtn" data-s="5" onclick="swSec('5',this)">電池・電気分解</button>
+  <button class="sbtn" data-s="6" onclick="swSec('6',this)">結晶・気体</button>
 </div>
 
-<!-- 問題95 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 95</span> 度数分布表</h3>
-  <p>次のデータは、ある クラス40人の数学のテストの得点である。</p>
-  <table>
-    <tr><th>階級(点)</th><th>0~20</th><th>20~40</th><th>40~60</th><th>60~80</th><th>80~100</th></tr>
-    <tr><th>度数(人)</th><td>3</td><td>8</td><td>15</td><td>10</td><td>4</td></tr>
-  </table>
-  <p>(1) 最頻値（モード）を求めよ。</p>
-  <p>(2) 度数分布表から平均値を求めよ。</p>
-  <p>(3) 中央値（メジアン）が含まれる階級を答えよ。</p>
+<div class="progress-bar"><div class="progress-fill" id="pbar"></div></div>
 
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説（めっちゃ丁寧に！）</h4>
+<!-- ======================== -->
+<!--        INPUT             -->
+<!-- ======================== -->
+<div id="modeI">
 
-    <div class="step">
-      <strong>（1）最頻値（モード）</strong><br>
-      最頻値 = 度数が一番多い階級の「真ん中の値」<br>
-      度数が一番多いのは「40~60」の15人<br>
-      → 階級値 = (40+60)/2 = <strong>50点</strong>
+<!-- SEC 1 原子・周期表 -->
+<div class="sc" id="I1">
+
+<div class="icard">
+  <h3><span class="itag basic">基礎</span>原子ってなに？</h3>
+  <div class="know" id="k1a">
+    <p>全ての物質は<strong>原子</strong>からできている。</p>
+    <p>原子の真ん中に<strong>原子核</strong>（陽子＋中性子）があって、そのまわりを<strong>電子</strong>が回っている。</p>
+
+    <div class="chunk">
+      <h4>3つだけ覚えろ</h4>
+      <p><strong>陽子</strong>：＋の電気。数＝原子番号。</p>
+      <p><strong>中性子</strong>：電気なし。陽子と一緒に核にいる。</p>
+      <p><strong>電子</strong>：−の電気。陽子と同じ数（中性原子のとき）。</p>
     </div>
 
-    <div class="step">
-      <strong>（2）平均値</strong><br>
-      各階級の「階級値 × 度数」を全部足して、合計人数で割る<br><br>
-      階級値：10, 30, 50, 70, 90<br>
-      10×3 + 30×8 + 50×15 + 70×10 + 90×4<br>
-      = 30 + 240 + 750 + 700 + 360 = 2080<br>
-      平均値 = 2080 ÷ 40 = <strong>52点</strong>
+    <div class="fl">質量数 A ＝ 陽子の数 Z ＋ 中性子の数</div>
+    <div class="fw">→ 重さの目安。電子は軽すぎて無視。</div>
+
+    <div class="fl">原子番号 ＝ 陽子の数 ＝ 電子の数</div>
+    <div class="fw">→ 原子番号だけで陽子も電子もわかる！</div>
+
+    <p>中性子の数 ＝ 質量数 − 原子番号 で求まる。</p>
+
+    <div class="chunk">
+      <h4>同位体（アイソトープ）</h4>
+      <p>陽子数が同じで中性子数が違う原子のこと。</p>
+      <p>例：¹²C と ¹³C → 陽子は両方6個、中性子が6個と7個。</p>
+      <p>化学的性質はほぼ同じ！（電子の数が同じだから）</p>
+    </div>
+  </div>
+  <button class="speak" onclick="sp('k1a',this)">読み上げ 1.2x</button>
+</div>
+
+<div class="icard">
+  <h3><span class="itag key">必須</span>電子配置</h3>
+  <div class="know" id="k1b">
+    <p>電子は<strong>内側の殻から順番</strong>に入る。</p>
+
+    <div class="fl">K殻: 最大2個 → L殻: 最大8個 → M殻: 最大18個</div>
+    <div class="fw">各殻の最大 = 2n² （K:n=1, L:n=2, M:n=3）</div>
+
+    <p><strong>最外殻の電子 = 価電子</strong>。これが化学的性質を決める。</p>
+    <p>Na(11): K(2) L(8) M(1) → 価電子1個 → 1個捨てたい → Na⁺になりやすい</p>
+    <p>Cl(17): K(2) L(8) M(7) → 価電子7個 → 1個欲しい → Cl⁻になりやすい</p>
+
+    <div class="chunk">
+      <h4>イオンのルール</h4>
+      <p>陽イオン：電子を失う（Na → Na⁺、電子10個、Neと同じ配置で安定）</p>
+      <p>陰イオン：電子をもらう（Cl → Cl⁻、電子18個、Arと同じ配置で安定）</p>
+      <p>→ どっちも希ガスと同じ配置になって安定する！</p>
+    </div>
+  </div>
+  <button class="speak" onclick="sp('k1b',this)">読み上げ 1.2x</button>
+</div>
+
+<div class="icard">
+  <h3><span class="itag mem">暗記</span>周期表 1〜20</h3>
+  <div class="know" id="k1c">
+    <div class="goro">
+      <div class="big">水兵リーベ僕の船</div>
+      <div class="big">なぁに間があるシップス</div>
+      <div class="big">クラークか</div>
+      <div class="small">H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca</div>
     </div>
 
-    <div class="step">
-      <strong>（3）中央値が含まれる階級</strong><br>
-      40人なので中央値は20番目と21番目の平均<br>
-      度数を下から足していく：<br>
-      0~20: 3人（累計3人）<br>
-      20~40: 8人（累計11人）<br>
-      40~60: 15人（累計26人） ← 20番目、21番目はここ！<br>
-      → 中央値が含まれる階級は <strong>「40~60」</strong>
+    <p><strong>1族 アルカリ金属</strong>（H以外）：Li, Na, K, Rb, Cs, Fr</p>
+    <div class="goro">
+      <div class="big">リッチな関西 ルビーせしめてフランスへ</div>
     </div>
 
-    <div class="answer">答え：(1) 50点　(2) 52点　(3) 40以上60未満の階級</div>
+    <p><strong>17族 ハロゲン</strong>：F, Cl, Br, I, At</p>
+    <div class="goro">
+      <div class="big">ふっくらブラウス 愛のあと</div>
+    </div>
+
+    <p><strong>18族 希ガス</strong>：He, Ne, Ar, Kr, Xe, Rn → 最外殻が満杯で超安定。反応しない。</p>
+    <p><strong>典型元素</strong>：1,2族 と 12〜18族。<strong>遷移元素</strong>：3〜11族（第4周期以降に登場）。</p>
+    <p>第3周期（Na〜Ar）は全部典型元素。</p>
+  </div>
+  <button class="speak" onclick="sp('k1c',this)">読み上げ 1.2x</button>
+</div>
+
+</div><!-- /I1 -->
+
+<!-- SEC 2 化学結合・製錬 -->
+<div class="sc hidden" id="I2">
+
+<div class="icard">
+  <h3><span class="itag key">核心</span>3つの化学結合</h3>
+  <div class="know" id="k2a">
+    <div class="chunk">
+      <h4>イオン結合</h4>
+      <p>金属が電子を渡し、非金属が受け取る。＋と−が引き合う。</p>
+      <p>例：NaCl, CaCl₂, MgO</p>
+      <p>性質：硬いがもろい。水に溶ける。融点高い。</p>
+    </div>
+
+    <div class="chunk">
+      <h4>共有結合</h4>
+      <p>非金属どうしが電子を共有する。</p>
+      <p>分子を作る → 分子結晶（H₂O, CO₂）：柔らかい、融点低い</p>
+      <p>巨大な網目 → 共有結合の結晶（ダイヤ, SiO₂）：超硬い、融点超高い</p>
+    </div>
+
+    <div class="chunk">
+      <h4>金属結合</h4>
+      <p>金属原子が自由電子を共有して結びつく。</p>
+      <p>例：Fe, Cu, Al</p>
+      <p>性質：電気・熱を通す。展性（たたくと広がる）・延性（引っ張ると伸びる）あり。</p>
+    </div>
+
+    <div class="fl">判別3ステップ</div>
+    <p>① 金属＋非金属 → イオン結合</p>
+    <p>② 非金属＋非金属 → 共有結合（分子 or 網目）</p>
+    <p>③ 金属だけ → 金属結合</p>
+
+    <div class="fl">電気陰性度：F > O > N > Cl > Br > C > S > H</div>
+    <div class="fw">差が大きい→イオン結合寄り、差が小さい→共有結合寄り</div>
+  </div>
+  <button class="speak" onclick="sp('k2a',this)">読み上げ 1.2x</button>
+</div>
+
+<div class="icard">
+  <h3><span class="itag calc">応用</span>鉄の製錬（溶鉱炉）</h3>
+  <div class="know" id="k2b">
+    <p>自然界の鉄 = 酸化鉄 Fe₂O₃（赤錆みたいなもの）。これを還元して純粋な鉄にする。</p>
+
+    <div class="fl">① C + O₂ → CO₂</div>
+    <div class="fw">コークス（炭素）を燃やす</div>
+    <div class="fl">② CO₂ + C → 2CO</div>
+    <div class="fw">一酸化炭素ができる（これが主役！）</div>
+    <div class="fl">③ Fe₂O₃ + 3CO → 2Fe + 3CO₂</div>
+    <div class="fw">COがFe₂O₃からO(酸素)を奪う → 鉄が取り出せる！</div>
+
+    <div class="chunk">
+      <h4>銑鉄 → 鋼</h4>
+      <p><strong>銑鉄</strong>：溶鉱炉から出る鉄。炭素を約4%含む。硬いけどもろい。</p>
+      <p><strong>鋼</strong>：転炉で酸素を吹き込み炭素を0.02〜2%に減らしたもの。丈夫でしなやか。</p>
+    </div>
+  </div>
+  <button class="speak" onclick="sp('k2b',this)">読み上げ 1.2x</button>
+</div>
+
+</div><!-- /I2 -->
+
+<!-- SEC 3 mol・濃度 -->
+<div class="sc hidden" id="I3">
+
+<div class="icard">
+  <h3><span class="itag key">最重要</span>mol（モル）</h3>
+  <div class="know" id="k3a">
+    <p>mol = 原子や分子を「まとめて数える単位」。1ダース=12個と同じノリ。</p>
+
+    <div class="fl">1 mol = 6.02 × 10²³ 個</div>
+    <div class="fw">アボガドロ定数。どんな物質でも1molはこの個数！</div>
+
+    <div class="chunk">
+      <h4>mol計算 3パターン</h4>
+      <p><strong>g → mol</strong>：÷ モル質量</p>
+      <p><strong>mol → g</strong>：× モル質量</p>
+      <p><strong>L → mol</strong>：÷ 22.4（標準状態の気体のみ）</p>
+    </div>
+
+    <div class="fl">モル質量 = 原子量の合計 (g/mol)</div>
+    <div class="fw">H₂O = 1×2+16 = 18 g/mol、CO₂ = 12+16×2 = 44 g/mol</div>
+
+    <div class="fl">気体 1 mol = 22.4 L（標準状態：0℃, 1気圧）</div>
+    <div class="fw">気体の種類に関係なく！ O₂でもCO₂でも1mol=22.4L</div>
+  </div>
+  <button class="speak" onclick="sp('k3a',this)">読み上げ 1.2x</button>
+</div>
+
+<div class="icard">
+  <h3><span class="itag calc">計算</span>濃度</h3>
+  <div class="know" id="k3b">
+    <div class="fl">質量%濃度 = 溶質(g) ÷ 溶液(g) × 100</div>
+    <div class="fw">溶液 = 溶質 + 溶媒（全体で割る！）</div>
+
+    <div class="fl">モル濃度(mol/L) = mol ÷ 体積(L)</div>
+    <div class="fw">mLは÷1000してLに！ 500mL = 0.5L</div>
+
+    <div class="fl">密度→モル濃度: 10dw ÷ M</div>
+    <div class="fw">d=密度, w=質量%, M=モル質量</div>
+  </div>
+  <button class="speak" onclick="sp('k3b',this)">読み上げ 1.2x</button>
+</div>
+
+<div class="icard">
+  <h3><span class="itag calc">計算</span>化学反応式の量的関係</h3>
+  <div class="know" id="k3c">
+    <div class="fl">係数の比 = molの比</div>
+    <div class="fw">これが全て！</div>
+    <p>例：2H₂ + O₂ → 2H₂O</p>
+    <p>→ H₂ : O₂ : H₂O = 2 : 1 : 2</p>
+    <p>→ H₂ が4molなら → O₂は2mol必要 → H₂Oは4molできる</p>
+
+    <div class="chunk">
+      <h4>手順3ステップ</h4>
+      <p>① 問題の量をmolに変換（g÷モル質量、L÷22.4）</p>
+      <p>② 係数の比で目的物質のmolを求める</p>
+      <p>③ molをg or Lに変換して答え</p>
+    </div>
+  </div>
+  <button class="speak" onclick="sp('k3c',this)">読み上げ 1.2x</button>
+</div>
+
+</div><!-- /I3 -->
+
+<!-- SEC 4 酸化還元 -->
+<div class="sc hidden" id="I4">
+
+<div class="icard">
+  <h3><span class="itag key">核心</span>酸化と還元</h3>
+  <div class="know" id="k4a">
+    <div class="fl">酸化 = 電子を失う = 酸化数が増える</div>
+    <div class="fl">還元 = 電子を得る = 酸化数が減る</div>
+    <div class="fw">酸化と還元は必ずセットで起きる！</div>
+
+    <p><strong>酸化剤</strong>：相手を酸化する（自分は還元される）</p>
+    <p><strong>還元剤</strong>：相手を還元する（自分は酸化される）</p>
+
+    <div class="chunk">
+      <h4>酸化数 5つのルール</h4>
+      <p>① 単体 = 0（H₂, O₂, Fe）</p>
+      <p>② 化合物中の H = +1</p>
+      <p>③ 化合物中の O = −2</p>
+      <p>④ 化合物全体の合計 = 0</p>
+      <p>⑤ イオンの合計 = 電荷</p>
+    </div>
+
+    <p><strong>計算方法</strong>：求めたい原子をxとして方程式を立てるだけ。</p>
+    <p>例：H₂SO₄ の S → 2(+1) + x + 4(−2) = 0 → x = +6</p>
+  </div>
+  <button class="speak" onclick="sp('k4a',this)">読み上げ 1.2x</button>
+</div>
+
+</div><!-- /I4 -->
+
+<!-- SEC 5 電池・電気分解 -->
+<div class="sc hidden" id="I5">
+
+<div class="icard">
+  <h3><span class="itag key">核心</span>電池</h3>
+  <div class="know" id="k5a">
+    <p>電池 = 化学エネルギー → 電気エネルギー</p>
+
+    <div class="fl">負極で酸化（電子を出す）、正極で還元（電子を受ける）</div>
+    <div class="fw">覚え方：「ぼ（負）さん（酸化）」</div>
+
+    <p>イオン化傾向が大きい方が負極になる！</p>
+    <div class="goro">
+      <div class="big">貸そうかな まぁ当てにすんな ひどすぎる借金</div>
+      <div class="small">K Ca Na Mg Al Zn Fe Ni Sn Pb H Cu Hg Ag Pt Au</div>
+    </div>
+
+    <div class="chunk">
+      <h4>ダニエル電池</h4>
+      <p>負極(Zn板)：Zn → Zn²⁺ + 2e⁻（亜鉛が溶ける）</p>
+      <p>正極(Cu板)：Cu²⁺ + 2e⁻ → Cu（銅が析出）</p>
+      <p>→ Znの方がイオン化傾向大きいからZnが負極</p>
+    </div>
+  </div>
+  <button class="speak" onclick="sp('k5a',this)">読み上げ 1.2x</button>
+</div>
+
+<div class="icard">
+  <h3><span class="itag key">核心</span>電気分解</h3>
+  <div class="know" id="k5b">
+    <p>電気分解 = 電気エネルギー → 化学変化（電池の逆）</p>
+
+    <div class="fl">陽極で酸化、陰極で還元</div>
+    <div class="fw">覚え方：「よう（陽）さん（酸化）」→ 電池と逆の極！</div>
+
+    <div class="chunk">
+      <h4>CuCl₂水溶液の電気分解</h4>
+      <p>陰極：Cu²⁺ + 2e⁻ → Cu（銅が析出）</p>
+      <p>陽極：2Cl⁻ → Cl₂ + 2e⁻（塩素ガス発生）</p>
+    </div>
+
+    <div class="fl">ファラデーの法則：Q = It</div>
+    <div class="fw">Q=電気量(C), I=電流(A), t=時間(秒)</div>
+    <div class="fl">電子 1mol = 96500 C</div>
+    <div class="fw">電子のmol = Q ÷ 96500 → これで析出量がわかる</div>
+  </div>
+  <button class="speak" onclick="sp('k5b',this)">読み上げ 1.2x</button>
+</div>
+
+</div><!-- /I5 -->
+
+<!-- SEC 6 結晶・気体 -->
+<div class="sc hidden" id="I6">
+
+<div class="icard">
+  <h3><span class="itag calc">計算</span>結晶構造</h3>
+  <div class="know" id="k6a">
+    <div class="chunk">
+      <h4>原子の数え方</h4>
+      <p>頂点 → 1/8個（8つの格子で共有）</p>
+      <p>辺 → 1/4個</p>
+      <p>面 → 1/2個</p>
+      <p>体内 → 1個</p>
+    </div>
+
+    <div class="fl">体心立方格子：8×(1/8) + 1 = 2個</div>
+    <div class="fw">配位数8, 充填率68%</div>
+    <div class="fl">面心立方格子：8×(1/8) + 6×(1/2) = 4個</div>
+    <div class="fw">配位数12, 充填率74%</div>
+
+    <div class="fl">密度 = 原子数×M / (Nₐ×a³)</div>
+    <div class="fw">M=原子量, Nₐ=アボガドロ定数, a=一辺</div>
+  </div>
+  <button class="speak" onclick="sp('k6a',this)">読み上げ 1.2x</button>
+</div>
+
+<div class="icard">
+  <h3><span class="itag key">最重要</span>気体の状態方程式</h3>
+  <div class="know" id="k6b">
+    <div class="fl">PV = nRT</div>
+    <div class="fw">P=圧力(Pa), V=体積(L), n=mol, R=8.31×10³, T=温度(K)</div>
+
+    <div class="fl">T(K) = t(℃) + 273</div>
+    <div class="fw">27℃→300K。絶対に忘れるな！</div>
+
+    <div class="fl">ボイルの法則：P₁V₁ = P₂V₂（温度一定）</div>
+    <div class="fl">シャルルの法則：V₁/T₁ = V₂/T₂（圧力一定）</div>
+
+    <div class="chunk">
+      <h4>使い方3ステップ</h4>
+      <p>① ℃ → K に変換（+273）</p>
+      <p>② 求めたいものを左辺に</p>
+      <p>③ 単位を揃える（Pa, L, mol, K）</p>
+    </div>
+  </div>
+  <button class="speak" onclick="sp('k6b',this)">読み上げ 1.2x</button>
+</div>
+
+</div><!-- /I6 -->
+
+</div><!-- /modeI -->
+
+
+<!-- ======================== -->
+<!--        OUTPUT            -->
+<!-- ======================== -->
+<div id="modeO" class="hidden">
+
+<!-- SEC 1 -->
+<div class="sc" id="O1">
+
+<!-- 前提クイズ -->
+<div class="pre-quiz">
+  <h4>前提チェック（問258を解く前に）</h4>
+  <p>Q1. 原子番号 = ___の数 = ___の数</p>
+  <p>Q2. 質量数 = ___の数 + ___の数</p>
+  <p>Q3. 中性子の数の求め方は？</p>
+  <button class="hint-btn" onclick="toggleHint(this);h()">ヒント</button>
+  <div class="hint-box">
+    Q1. 陽子 = 電子（中性原子のとき）<br>
+    Q2. 陽子 + 中性子<br>
+    Q3. 質量数 − 原子番号（左上 − 左下）
   </div>
 </div>
 
-<!-- 問題96 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 96</span> 相関係数・散布図</h3>
-  <p>次の表は、5人の生徒の数学と英語の得点である。</p>
-  <table>
-    <tr><th>生徒</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
-    <tr><th>数学 x</th><td>50</td><td>60</td><td>70</td><td>80</td><td>90</td></tr>
-    <tr><th>英語 y</th><td>40</td><td>55</td><td>60</td><td>75</td><td>70</td></tr>
-  </table>
-  <p>(1) x と y の平均値をそれぞれ求めよ。</p>
-  <p>(2) x と y の共分散を求めよ。</p>
-  <p>(3) x と y の相関係数を求めよ。</p>
-
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>（1）平均値</strong><br>
-      x̄ = (50+60+70+80+90)/5 = 350/5 = <strong>70</strong><br>
-      ȳ = (40+55+60+75+70)/5 = 300/5 = <strong>60</strong>
+<div class="qcard">
+  <div class="qhd" onclick="h()"><span class="qnum">問258</span><h3>原子の構造と電子配置</h3></div>
+  <div class="qbd">
+    <p>次の原子について、陽子の数、中性子の数、電子の数をそれぞれ答えよ。また、電子配置を書け。</p>
+    <p>(1) ¹²₆C（炭素）　(2) ²³₁₁Na（ナトリウム）</p>
+    <p>(3) ³⁵₁₇Cl（塩素）　(4) ⁴⁰₂₀Ca（カルシウム）</p>
+    <p>(5) Na⁺イオンの電子配置を書け。</p>
+    <div class="memo"><textarea placeholder="自分の答えを書いてから解説を見よう..." onclick="h()"></textarea></div>
+    <button class="ans-btn" onclick="toggleK(this);hc()">解説を見る</button>
+    <div class="kai">
+      <div class="stp"><strong>(1) ¹²₆C</strong><br>陽子:6, 中性子:12−6=6, 電子:6<br>電子配置: K(2) L(4)</div>
+      <div class="stp"><strong>(2) ²³₁₁Na</strong><br>陽子:11, 中性子:23−11=12, 電子:11<br>電子配置: K(2) L(8) M(1)</div>
+      <div class="stp"><strong>(3) ³⁵₁₇Cl</strong><br>陽子:17, 中性子:35−17=18, 電子:17<br>電子配置: K(2) L(8) M(7)</div>
+      <div class="stp"><strong>(4) ⁴⁰₂₀Ca</strong><br>陽子:20, 中性子:40−20=20, 電子:20<br>電子配置: K(2) L(8) M(8) N(2)</div>
+      <div class="stp"><strong>(5) Na⁺</strong><br>Naの電子11→1個失って10個<br>K(2) L(8)（Ne=ネオンと同じ！安定！）</div>
+      <div class="ans-final">左下=陽子=電子、左上=質量数、引き算で中性子</div>
     </div>
-
-    <div class="step">
-      <strong>（2）共分散</strong><br>
-      各(xᵢ-x̄)(yᵢ-ȳ)を計算：<br>
-      A: (50-70)(40-60) = (-20)(-20) = 400<br>
-      B: (60-70)(55-60) = (-10)(-5) = 50<br>
-      C: (70-70)(60-60) = 0×0 = 0<br>
-      D: (80-70)(75-60) = 10×15 = 150<br>
-      E: (90-70)(70-60) = 20×10 = 200<br>
-      共分散 = (400+50+0+150+200)/5 = 800/5 = <strong>160</strong>
-    </div>
-
-    <div class="step">
-      <strong>（3）相関係数</strong><br>
-      まずsx（xの標準偏差）を求める：<br>
-      各(xᵢ-x̄)² : 400, 100, 0, 100, 400 → 分散 = 1000/5 = 200<br>
-      sx = √200 = 10√2<br><br>
-      sy（yの標準偏差）を求める：<br>
-      各(yᵢ-ȳ)² : 400, 25, 0, 225, 100 → 分散 = 750/5 = 150<br>
-      sy = √150 = 5√6<br><br>
-      r = 160 / (10√2 × 5√6) = 160 / (50√12) = 160 / (100√3)<br>
-      = 8/(5√3) = 8√3/15 ≈ <strong>0.924</strong>
-    </div>
-
-    <div class="answer">答え：(1) x̄=70, ȳ=60　(2) 160　(3) 8√3/15 ≈ 0.92（強い正の相関）</div>
   </div>
 </div>
 
-<!-- 問題97 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 97</span> 分散・標準偏差</h3>
-  <p>次のデータの分散と標準偏差を求めよ。</p>
-  <p style="font-size:1.2em; font-weight:bold; text-align:center;">2, 4, 6, 8, 10</p>
-
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>Step1: 平均を出す</strong><br>
-      x̄ = (2+4+6+8+10)/5 = 30/5 = 6
-    </div>
-
-    <div class="step">
-      <strong>Step2: 「2乗の平均」を出す</strong><br>
-      各データの2乗: 4, 16, 36, 64, 100<br>
-      2乗の平均 = (4+16+36+64+100)/5 = 220/5 = 44
-    </div>
-
-    <div class="step">
-      <strong>Step3: 分散 = 2乗の平均 − (平均)²</strong><br>
-      分散 = 44 − 6² = 44 − 36 = <strong>8</strong>
-    </div>
-
-    <div class="step">
-      <strong>Step4: 標準偏差 = √分散</strong><br>
-      標準偏差 = √8 = <strong>2√2 ≈ 2.83</strong>
-    </div>
-
-    <div class="answer">答え：分散 = 8、標準偏差 = 2√2</div>
+<!-- 前提クイズ2 -->
+<div class="pre-quiz">
+  <h4>前提チェック（周期表の問題の前に）</h4>
+  <p>Q1. 18族元素をまとめて何というか？</p>
+  <p>Q2. 17族元素をまとめて何というか？</p>
+  <p>Q3. 1族（H以外）をまとめて何というか？</p>
+  <button class="hint-btn" onclick="toggleHint(this);h()">ヒント</button>
+  <div class="hint-box">
+    Q1. 希ガス（最外殻が満杯で安定）<br>
+    Q2. ハロゲン（ふっくらブラウス愛のあと）<br>
+    Q3. アルカリ金属（リッチな関西…）
   </div>
 </div>
 
-<!-- 問題98 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 98</span> データの変換</h3>
-  <p>変量 x の平均が 50、標準偏差が 10 であるとき、u = 2x + 3 としたときの u の平均と標準偏差を求めよ。</p>
-
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>覚えるルール</strong><br>
-      u = ax + b のとき<br>
-      ・ū = a × x̄ + b（平均は a倍して b を足す）<br>
-      ・su = |a| × sx（標準偏差は |a| 倍、b は関係ない！）
+<div class="qcard">
+  <div class="qhd" onclick="h()"><span class="qnum">周期表</span><h3>周期表と元素の性質</h3></div>
+  <div class="qbd">
+    <p>(1) 原子番号1〜20までの元素を周期表の順に書け。</p>
+    <p>(2) 第3周期の元素のうち、典型元素をすべて答えよ。</p>
+    <p>(3) 希ガスをすべて答えよ。また、希ガスが化学反応しにくい理由を説明せよ。</p>
+    <p>(4) ハロゲンをすべて答えよ。</p>
+    <p>(5) アルカリ金属をすべて答えよ。</p>
+    <div class="memo"><textarea placeholder="メモ..." onclick="h()"></textarea></div>
+    <button class="ans-btn" onclick="toggleK(this);hc()">解説を見る</button>
+    <div class="kai">
+      <div class="stp"><strong>(1)</strong> H, He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca<br>「水兵リーベ僕の船、なぁに間があるシップス、クラークか」</div>
+      <div class="stp"><strong>(2)</strong> Na, Mg, Al, Si, P, S, Cl, Ar<br>→ 第3周期は全部典型元素！（遷移元素は第4周期から）</div>
+      <div class="stp"><strong>(3)</strong> He, Ne, Ar, Kr, Xe, Rn（18族）<br>理由：最外殻電子が満たされている（閉殻構造）ため、電子のやり取りが不要で安定。</div>
+      <div class="stp"><strong>(4)</strong> F, Cl, Br, I, At（17族）<br>「ふっくらブラウス愛のあと」</div>
+      <div class="stp"><strong>(5)</strong> Li, Na, K, Rb, Cs, Fr（1族、H除く）<br>「リッチな関西ルビーせしめてフランスへ」</div>
     </div>
-
-    <div class="step">
-      <strong>計算</strong><br>
-      ū = 2 × 50 + 3 = <strong>103</strong><br>
-      su = |2| × 10 = <strong>20</strong>
-    </div>
-
-    <div class="point">
-      <h4>超重要ポイント</h4>
-      標準偏差にはbを足さない！ 標準偏差は「バラつき」だから、全部に同じ数を足してもバラつきは変わらない。a倍だけが影響する！
-    </div>
-
-    <div class="answer">答え：平均 = 103、標準偏差 = 20</div>
   </div>
 </div>
 
-</div><!-- /math -->
+</div><!-- /O1 -->
 
-<!-- ============================================ -->
-<!-- 化学：原子・周期表 -->
-<!-- ============================================ -->
-<div id="chem1" class="section hidden">
+<!-- SEC 2 -->
+<div class="sc hidden" id="O2">
 
-<h2>化学基礎 原子の構造・電子配置・周期表</h2>
-<div class="section-intro">
-  原子の中身を理解するのが化学の第一歩！ 陽子・中性子・電子の関係と、電子配置のルールを覚えよう。
+<div class="pre-quiz">
+  <h4>前提チェック（問259の前に）</h4>
+  <p>Q1. 金属＋非金属 → ___結合</p>
+  <p>Q2. 非金属＋非金属 → ___結合</p>
+  <p>Q3. 金属だけ → ___結合</p>
+  <button class="hint-btn" onclick="toggleHint(this);h()">ヒント</button>
+  <div class="hint-box">Q1. イオン　Q2. 共有　Q3. 金属</div>
 </div>
 
-<div class="formula-box">
-  <h3>必須知識</h3>
-  <div class="formula">質量数 = 陽子の数 + 中性子の数</div>
-  <div class="explain">→ 質量数は原子の「重さ」の目安。陽子と中性子の合計。</div>
-
-  <div class="formula">原子番号 = 陽子の数 = 電子の数（中性原子のとき）</div>
-  <div class="explain">→ 原子番号がわかれば陽子と電子の数がわかる！</div>
-
-  <div class="formula">電子配置：K殻(2個) → L殻(8個) → M殻(18個) → N殻(32個)</div>
-  <div class="explain">→ 内側の殻から順番に埋めていく。各殻の最大収容数は 2n² 個。</div>
-
-  <div class="formula">同位体（アイソトープ）：陽子数が同じで中性子数が違う原子</div>
-  <div class="explain">→ 例：¹²C と ¹³C は同位体。化学的性質はほぼ同じ！</div>
-
-  <div class="formula">イオン：陽イオン = 電子を失う、陰イオン = 電子を受け取る</div>
-  <div class="explain">→ Na → Na⁺（電子1個失う）、Cl → Cl⁻（電子1個もらう）</div>
-</div>
-
-<!-- 問題258 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 258</span> 原子の構造と電子配置</h3>
-  <p>次の原子について、陽子の数、中性子の数、電子の数をそれぞれ答えよ。また、電子配置を書け。</p>
-  <p>(1) ¹²₆C（炭素）</p>
-  <p>(2) ²³₁₁Na（ナトリウム）</p>
-  <p>(3) ³⁵₁₇Cl（塩素）</p>
-  <p>(4) ⁴⁰₂₀Ca（カルシウム）</p>
-  <p>(5) Na⁺イオンの電子配置を書け。</p>
-
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>解き方のルール</strong><br>
-      ᴬzX のとき：<br>
-      ・陽子の数 = Z（左下の数 = 原子番号）<br>
-      ・質量数 = A（左上の数）<br>
-      ・中性子の数 = A − Z（質量数 − 陽子数）<br>
-      ・電子の数 = Z（中性原子なら陽子と同じ）
+<div class="qcard">
+  <div class="qhd" onclick="h()"><span class="qnum">問259</span><h3>化学結合の種類</h3></div>
+  <div class="qbd">
+    <p>次の物質の化学結合の種類を答えよ。また、それぞれの結晶の名称を答えよ。</p>
+    <p>(1) NaCl　(2) H₂O　(3) Fe　(4) SiO₂</p>
+    <p>(5) CO₂　(6) Cu　(7) CaCl₂　(8) ダイヤモンド C</p>
+    <div class="memo"><textarea placeholder="メモ..." onclick="h()"></textarea></div>
+    <button class="ans-btn" onclick="toggleK(this);hc()">解説を見る</button>
+    <div class="kai">
+      <div class="stp"><strong>(1) NaCl</strong> → Na(金属)+Cl(非金属) → イオン結合・イオン結晶</div>
+      <div class="stp"><strong>(2) H₂O</strong> → 非金属同士、分子を作る → 共有結合・分子結晶</div>
+      <div class="stp"><strong>(3) Fe</strong> → 金属のみ → 金属結合・金属結晶</div>
+      <div class="stp"><strong>(4) SiO₂</strong> → 非金属同士、巨大網目 → 共有結合の結晶</div>
+      <div class="stp"><strong>(5) CO₂</strong> → 非金属同士、分子 → 共有結合・分子結晶</div>
+      <div class="stp"><strong>(6) Cu</strong> → 金属のみ → 金属結合・金属結晶</div>
+      <div class="stp"><strong>(7) CaCl₂</strong> → Ca(金属)+Cl(非金属) → イオン結合・イオン結晶</div>
+      <div class="stp"><strong>(8) ダイヤモンド</strong> → C原子の巨大網目 → 共有結合の結晶</div>
+      <div class="ans-final">金属+非金属→イオン、非金属同士→共有、金属だけ→金属</div>
     </div>
-
-    <div class="step">
-      <strong>(1) ¹²₆C</strong><br>
-      陽子: 6, 中性子: 12−6=6, 電子: 6<br>
-      電子配置: K(2) L(4)
-    </div>
-    <div class="step">
-      <strong>(2) ²³₁₁Na</strong><br>
-      陽子: 11, 中性子: 23−11=12, 電子: 11<br>
-      電子配置: K(2) L(8) M(1)
-    </div>
-    <div class="step">
-      <strong>(3) ³⁵₁₇Cl</strong><br>
-      陽子: 17, 中性子: 35−17=18, 電子: 17<br>
-      電子配置: K(2) L(8) M(7)
-    </div>
-    <div class="step">
-      <strong>(4) ⁴⁰₂₀Ca</strong><br>
-      陽子: 20, 中性子: 40−20=20, 電子: 20<br>
-      電子配置: K(2) L(8) M(8) N(2)
-    </div>
-    <div class="step">
-      <strong>(5) Na⁺</strong><br>
-      Na は電子11個 → Na⁺ は電子1個失って10個<br>
-      電子配置: K(2) L(8)（ネオンと同じ！安定）
-    </div>
-
-    <div class="point">
-      <h4>覚え方のコツ</h4>
-      「左下が陽子（＝電子）、左上が質量数、引き算で中性子」<br>
-      イオンになったら電子が増減するだけ。陽子は変わらない！
-    </div>
-
-    <div class="answer">答え：上記参照</div>
   </div>
 </div>
 
-<!-- 問題：周期表 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題</span> 周期表と元素の性質</h3>
-  <p>次の問いに答えよ。</p>
-  <p>(1) 原子番号1～20までの元素を、周期表の順に書け。</p>
-  <p>(2) 第3周期の元素のうち、典型元素をすべて答えよ。</p>
-  <p>(3) 希ガスをすべて答えよ。また、希ガスが化学反応しにくい理由を説明せよ。</p>
-  <p>(4) ハロゲンをすべて答えよ。</p>
-  <p>(5) アルカリ金属をすべて答えよ。</p>
+<div class="pre-quiz">
+  <h4>前提チェック（問188,189の前に）</h4>
+  <p>Q1. 鉄鉱石の化学式は？</p>
+  <p>Q2. 還元とは何を得ること？</p>
+  <button class="hint-btn" onclick="toggleHint(this);h()">ヒント</button>
+  <div class="hint-box">Q1. Fe₂O₃（酸化鉄(III)）<br>Q2. 電子を得ること（=酸素を失うこと）</div>
+</div>
 
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>(1) 原子番号1～20</strong><br>
-      覚え方の語呂合わせ：<br>
-      「<strong>水兵リーベ僕の船、なぁに間があるシップス、クラークか</strong>」<br>
-      H, He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca
+<div class="qcard">
+  <div class="qhd" onclick="h()"><span class="qnum">問188,189</span><h3>鉄の製錬（溶鉱炉）</h3></div>
+  <div class="qbd">
+    <p>鉄は溶鉱炉（高炉）で鉄鉱石（Fe₂O₃）をコークス（C）で還元して作られる。</p>
+    <p>(1) 溶鉱炉内で起こる反応を化学反応式で3つ書け。</p>
+    <p>(2) 溶鉱炉から出てくる鉄を何というか。また含まれる不純物は何か。</p>
+    <p>(3) 銑鉄から鋼を作る方法を説明せよ。</p>
+    <div class="memo"><textarea placeholder="メモ..." onclick="h()"></textarea></div>
+    <button class="ans-btn" onclick="toggleK(this);hc()">解説を見る</button>
+    <div class="kai">
+      <div class="stp"><strong>(1)</strong><br>① C + O₂ → CO₂<br>② CO₂ + C → 2CO<br>③ Fe₂O₃ + 3CO → 2Fe + 3CO₂<br>→ COが還元剤としてFe₂O₃から酸素を奪う！</div>
+      <div class="stp"><strong>(2)</strong> 銑鉄（せんてつ）。不純物は炭素(C)約4%。硬いがもろい。</div>
+      <div class="stp"><strong>(3)</strong> 転炉に入れ酸素を吹き込み炭素を燃やして除去。炭素0.02〜2%にしたものが鋼（はがね）。丈夫で粘りがある。</div>
     </div>
-
-    <div class="step">
-      <strong>(2) 第3周期の典型元素</strong><br>
-      第3周期 = Na, Mg, Al, Si, P, S, Cl, Ar<br>
-      → 第3周期は全部典型元素！（遷移元素は第4周期以降に登場）
-    </div>
-
-    <div class="step">
-      <strong>(3) 希ガス</strong><br>
-      He, Ne, Ar, Kr, Xe, Rn（18族）<br>
-      理由：最外殻電子が満たされている（閉殻構造）ため、電子のやり取りをする必要がなく、安定している。
-    </div>
-
-    <div class="step">
-      <strong>(4) ハロゲン（17族）</strong><br>
-      F, Cl, Br, I, At<br>
-      覚え方：「<strong>ふっくらブラウスI(愛)のあと</strong>」
-    </div>
-
-    <div class="step">
-      <strong>(5) アルカリ金属（1族、Hを除く）</strong><br>
-      Li, Na, K, Rb, Cs, Fr<br>
-      覚え方：「<strong>リッチな関西、ルビーせしめてフランスへ</strong>」
-    </div>
-
-    <div class="answer">答え：上記参照</div>
   </div>
 </div>
 
-</div><!-- /chem1 -->
+</div><!-- /O2 -->
 
-<!-- ============================================ -->
-<!-- 化学：化学結合 -->
-<!-- ============================================ -->
-<div id="chem2" class="section hidden">
+<!-- SEC 3 -->
+<div class="sc hidden" id="O3">
 
-<h2>化学基礎 化学結合</h2>
-<div class="section-intro">
-  3つの結合（イオン・共有・金属）の違いを完璧に理解しよう！
+<div class="pre-quiz">
+  <h4>前提チェック（mol計算の前に）</h4>
+  <p>Q1. 1mol = ___個</p>
+  <p>Q2. H₂Oのモル質量は？(H=1, O=16)</p>
+  <p>Q3. 標準状態で気体1mol = ___L</p>
+  <p>Q4. 500mL = ___L</p>
+  <button class="hint-btn" onclick="toggleHint(this);h()">ヒント</button>
+  <div class="hint-box">Q1. 6.02×10²³　Q2. 1×2+16=18 g/mol　Q3. 22.4L　Q4. 0.5L</div>
 </div>
 
-<div class="formula-box">
-  <h3>3つの化学結合</h3>
-  <div class="formula">イオン結合：金属 + 非金属 → 電子を渡して＋と−で引き合う</div>
-  <div class="explain">→ 例：NaCl（食塩）。Naが電子をClに渡す。</div>
-
-  <div class="formula">共有結合：非金属 + 非金属 → 電子を共有する</div>
-  <div class="explain">→ 例：H₂O, CO₂。電子を一緒に使う。</div>
-
-  <div class="formula">金属結合：金属同士 → 自由電子が金属原子を結びつける</div>
-  <div class="explain">→ 例：Fe, Cu。電気を通す理由は自由電子！</div>
-
-  <div class="formula">電気陰性度：F > O > N > Cl > Br > C > S > H</div>
-  <div class="explain">→ 電子を引っ張る力の強さ。Fが最強！差が大きいとイオン結合になる。</div>
-</div>
-
-<!-- 問題259 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 259</span> 化学結合の種類</h3>
-  <p>次の物質の化学結合の種類を答えよ。また、それぞれの結晶の名称を答えよ。</p>
-  <p>(1) NaCl　(2) H₂O　(3) Fe　(4) SiO₂　(5) CO₂　(6) Cu　(7) CaCl₂　(8) ダイヤモンド C</p>
-
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>見分け方のコツ</strong><br>
-      ① 金属 + 非金属 → イオン結合 → イオン結晶<br>
-      ② 非金属 + 非金属 → 共有結合<br>
-      　→ 分子を作る → 分子結晶（CO₂, H₂Oなど）<br>
-      　→ 巨大な網目 → 共有結合の結晶（ダイヤ, SiO₂）<br>
-      ③ 金属のみ → 金属結合 → 金属結晶
+<div class="qcard">
+  <div class="qhd" onclick="h()"><span class="qnum">問121</span><h3>mol計算の基本</h3></div>
+  <div class="qbd">
+    <p>原子量：H=1, C=12, N=14, O=16, S=32, Na=23, Cl=35.5</p>
+    <p>(1) 水 H₂O 90g は何molか。</p>
+    <p>(2) 二酸化炭素 CO₂ 2mol の質量は何gか。</p>
+    <p>(3) 標準状態で 5.6L の酸素 O₂ は何molか。</p>
+    <p>(4) 硫酸 H₂SO₄ 0.5mol 中の酸素原子は何個か。</p>
+    <p>(5) 0.2mol/L の NaOH水溶液 500mL 中の NaOH は何molか。</p>
+    <div class="memo"><textarea placeholder="メモ..." onclick="h()"></textarea></div>
+    <button class="ans-btn" onclick="toggleK(this);hc()">解説を見る</button>
+    <div class="kai">
+      <div class="stp"><strong>(1)</strong> H₂O=18g/mol → 90÷18 = <strong>5 mol</strong></div>
+      <div class="stp"><strong>(2)</strong> CO₂=44g/mol → 2×44 = <strong>88 g</strong></div>
+      <div class="stp"><strong>(3)</strong> 5.6÷22.4 = <strong>0.25 mol</strong></div>
+      <div class="stp"><strong>(4)</strong> H₂SO₄の1分子にOは4個<br>0.5mol×4=2molのO<br>2×6.02×10²³ = <strong>1.204×10²⁴ 個</strong></div>
+      <div class="stp"><strong>(5)</strong> 500mL=0.5L<br>0.2×0.5 = <strong>0.1 mol</strong></div>
+      <div class="ans-final">g÷モル質量=mol、L÷22.4=mol、mol/L×L=mol</div>
     </div>
-
-    <div class="step">
-      <strong>(1) NaCl</strong> → Na(金属) + Cl(非金属) → <strong>イオン結合・イオン結晶</strong><br>
-      <strong>(2) H₂O</strong> → H(非金属) + O(非金属) → <strong>共有結合・分子結晶</strong><br>
-      <strong>(3) Fe</strong> → 金属のみ → <strong>金属結合・金属結晶</strong><br>
-      <strong>(4) SiO₂</strong> → 非金属同士だが巨大網目構造 → <strong>共有結合の結晶</strong><br>
-      <strong>(5) CO₂</strong> → 非金属同士、分子を作る → <strong>共有結合・分子結晶</strong><br>
-      <strong>(6) Cu</strong> → 金属のみ → <strong>金属結合・金属結晶</strong><br>
-      <strong>(7) CaCl₂</strong> → Ca(金属) + Cl(非金属) → <strong>イオン結合・イオン結晶</strong><br>
-      <strong>(8) ダイヤモンド C</strong> → 炭素原子の巨大網目 → <strong>共有結合の結晶</strong>
-    </div>
-
-    <div class="point">
-      <h4>結晶の性質まとめ</h4>
-      ・イオン結晶：硬いがもろい、水に溶ける、融点高い<br>
-      ・分子結晶：柔らかい、融点低い（ドライアイスなど）<br>
-      ・共有結合の結晶：超硬い、融点超高い（ダイヤモンド）<br>
-      ・金属結晶：電気通す、展性・延性あり
-    </div>
-
-    <div class="answer">答え：上記参照</div>
   </div>
 </div>
 
-<!-- 問題：鉄の製錬 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 188, 189</span> 鉄の製錬（溶鉱炉）</h3>
-  <p>鉄は溶鉱炉（高炉）で鉄鉱石（Fe₂O₃）をコークス（C）で還元して作られる。次の問いに答えよ。</p>
-  <p>(1) 溶鉱炉内で起こる反応を化学反応式で3つ書け。</p>
-  <p>(2) 溶鉱炉から出てくる鉄を何というか。また、その鉄に含まれる不純物は何か。</p>
-  <p>(3) 銑鉄から鋼を作る方法を説明せよ。</p>
+<div class="pre-quiz">
+  <h4>前提チェック（問122の前に）</h4>
+  <p>Q1. 化学反応式の係数の比は何の比と同じ？</p>
+  <p>Q2. H₂のモル質量は？</p>
+  <button class="hint-btn" onclick="toggleHint(this);h()">ヒント</button>
+  <div class="hint-box">Q1. molの比　Q2. 1×2=2 g/mol</div>
+</div>
 
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>(1) 溶鉱炉の反応式</strong><br>
-      ① C + O₂ → CO₂（コークスが燃える）<br>
-      ② CO₂ + C → 2CO（一酸化炭素ができる）<br>
-      ③ Fe₂O₃ + 3CO → 2Fe + 3CO₂（COが鉄鉱石を還元！）<br><br>
-      <strong>ポイント：</strong>COが還元剤として働き、Fe₂O₃からOを奪って鉄を取り出す！
+<div class="qcard">
+  <div class="qhd" onclick="h()"><span class="qnum">問122</span><h3>化学反応式の量的関係</h3></div>
+  <div class="qbd">
+    <p style="text-align:center;font-weight:700">2H₂ + O₂ → 2H₂O</p>
+    <p>(1) 水素 4mol を完全に反応させるのに必要な酸素は何molか。</p>
+    <p>(2) 水素 8g を完全燃焼させると、水は何g生成するか。</p>
+    <p>(3) 標準状態で酸素 11.2L と反応する水素は何Lか。</p>
+    <div class="memo"><textarea placeholder="メモ..." onclick="h()"></textarea></div>
+    <button class="ans-btn" onclick="toggleK(this);hc()">解説を見る</button>
+    <div class="kai">
+      <div class="stp"><strong>係数の比=molの比</strong>：H₂:O₂:H₂O = 2:1:2</div>
+      <div class="stp"><strong>(1)</strong> H₂:O₂=2:1 → 4×(1/2) = <strong>2 mol</strong></div>
+      <div class="stp"><strong>(2)</strong> H₂ 8g÷2=4mol<br>H₂:H₂O=2:2=1:1 → H₂O 4mol<br>4×18 = <strong>72 g</strong></div>
+      <div class="stp"><strong>(3)</strong> O₂ 11.2L÷22.4=0.5mol<br>H₂:O₂=2:1 → H₂=0.5×2=1mol<br>1×22.4 = <strong>22.4 L</strong></div>
     </div>
-
-    <div class="step">
-      <strong>(2)</strong><br>
-      溶鉱炉から出てくる鉄 = <strong>銑鉄（せんてつ）</strong><br>
-      不純物 = <strong>炭素（C）</strong>を約4%含む。硬いがもろい。
-    </div>
-
-    <div class="step">
-      <strong>(3) 鋼の製造</strong><br>
-      銑鉄を<strong>転炉</strong>に入れ、酸素を吹き込んで炭素を燃やして除去する。<br>
-      炭素含有量を0.02～2%に調整したものが<strong>鋼（はがね）</strong>。<br>
-      → 鋼は銑鉄より丈夫で粘りがある！
-    </div>
-
-    <div class="answer">答え：上記参照</div>
   </div>
 </div>
 
-</div><!-- /chem2 -->
-
-<!-- ============================================ -->
-<!-- 化学：mol計算 -->
-<!-- ============================================ -->
-<div id="chem3" class="section hidden">
-
-<h2>化学基礎 物質量（mol）と化学反応式</h2>
-<div class="section-intro">
-  molは化学の計算の基本！ ここを落とすと全部ダメになるから、徹底的に練習しよう。
-</div>
-
-<div class="formula-box">
-  <h3>mol計算の超重要公式</h3>
-
-  <div class="formula">1 mol = 6.02 × 10²³ 個（アボガドロ定数）</div>
-  <div class="explain">→ 原子でも分子でも、1molはこの個数！</div>
-
-  <div class="formula">mol = 質量(g) ÷ モル質量(g/mol)</div>
-  <div class="explain">→ 例：水H₂O のモル質量 = 1×2+16 = 18 g/mol。36gの水 = 36÷18 = 2mol</div>
-
-  <div class="formula">気体：1 mol = 22.4 L（標準状態 0℃, 1atm）</div>
-  <div class="explain">→ 気体の種類に関係なく、1molは22.4L！</div>
-
-  <div class="formula">mol = 体積(L) ÷ 22.4</div>
-
-  <div class="formula">モル濃度(mol/L) = mol ÷ 溶液の体積(L)</div>
-
-  <div class="formula">質量パーセント濃度(%) = (溶質の質量 / 溶液の質量) × 100</div>
-</div>
-
-<!-- 問題121 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 121</span> mol計算の基本</h3>
-  <p>次の各問いに答えよ。原子量：H=1, C=12, N=14, O=16, S=32, Na=23, Cl=35.5</p>
-  <p>(1) 水 H₂O 90g は何molか。</p>
-  <p>(2) 二酸化炭素 CO₂ 2mol の質量は何gか。</p>
-  <p>(3) 標準状態で 5.6L の酸素O₂は何molか。</p>
-  <p>(4) 硫酸 H₂SO₄ 0.5mol 中の酸素原子は何個か。</p>
-  <p>(5) 0.2mol/L の NaOH 水溶液 500mL 中の NaOH は何molか。</p>
-
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>(1) H₂O 90g → mol</strong><br>
-      H₂Oのモル質量 = 1×2 + 16 = 18 g/mol<br>
-      mol = 90 ÷ 18 = <strong>5 mol</strong>
+<div class="qcard">
+  <div class="qhd" onclick="h()"><span class="qnum">問171</span><h3>溶液の濃度</h3></div>
+  <div class="qbd">
+    <p>(1) 食塩 20g を水 180g に溶かした。質量パーセント濃度を求めよ。</p>
+    <p>(2) 密度 1.2g/cm³ の 10%塩酸のモル濃度を求めよ。(HCl=36.5)</p>
+    <div class="memo"><textarea placeholder="メモ..." onclick="h()"></textarea></div>
+    <button class="ans-btn" onclick="toggleK(this);hc()">解説を見る</button>
+    <div class="kai">
+      <div class="stp"><strong>(1)</strong> 溶液=20+180=200g<br>20÷200×100 = <strong>10%</strong></div>
+      <div class="stp"><strong>(2)</strong> 溶液1L=1000cm³<br>質量=1000×1.2=1200g<br>HCl=1200×0.10=120g<br>mol=120÷36.5 ≈ <strong>3.29 mol/L</strong><br>公式: 10×1.2×10÷36.5 ≈ 3.29</div>
     </div>
-
-    <div class="step">
-      <strong>(2) CO₂ 2mol → g</strong><br>
-      CO₂のモル質量 = 12 + 16×2 = 44 g/mol<br>
-      質量 = 2 × 44 = <strong>88 g</strong>
-    </div>
-
-    <div class="step">
-      <strong>(3) 5.6L のO₂ → mol</strong><br>
-      mol = 5.6 ÷ 22.4 = <strong>0.25 mol</strong>
-    </div>
-
-    <div class="step">
-      <strong>(4) H₂SO₄ 0.5mol中の酸素原子の個数</strong><br>
-      H₂SO₄ 1分子中に O は 4個ある<br>
-      0.5mol の H₂SO₄ に含まれる O = 0.5 × 4 = 2 mol<br>
-      個数 = 2 × 6.02×10²³ = <strong>1.204 × 10²⁴ 個</strong>
-    </div>
-
-    <div class="step">
-      <strong>(5) 0.2mol/L × 500mL</strong><br>
-      500mL = 0.5L<br>
-      mol = 0.2 × 0.5 = <strong>0.1 mol</strong>
-    </div>
-
-    <div class="point">
-      <h4>mol計算3ステップ</h4>
-      ① まずモル質量を計算する（原子量の合計）<br>
-      ② 単位に注目（g→mol、mol→g、L→mol）<br>
-      ③ mLはLに直す（÷1000）のを忘れない！
-    </div>
-
-    <div class="answer">答え：(1) 5mol (2) 88g (3) 0.25mol (4) 1.204×10²⁴個 (5) 0.1mol</div>
   </div>
 </div>
 
-<!-- 問題122 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 122</span> 化学反応式の量的関係</h3>
-  <p>次の化学反応について答えよ。</p>
-  <p style="text-align:center; font-size:1.1em; font-weight:bold;">2H₂ + O₂ → 2H₂O</p>
-  <p>(1) 水素 4mol を完全に反応させるのに必要な酸素は何molか。</p>
-  <p>(2) 水素 8g を完全燃焼させると、水は何g生成するか。</p>
-  <p>(3) 標準状態で酸素 11.2L と反応する水素は何Lか。</p>
+</div><!-- /O3 -->
 
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
+<!-- SEC 4 -->
+<div class="sc hidden" id="O4">
 
-    <div class="step">
-      <strong>化学反応式の係数 = molの比</strong><br>
-      2H₂ + O₂ → 2H₂O<br>
-      H₂ : O₂ : H₂O = 2 : 1 : 2
+<div class="pre-quiz">
+  <h4>前提チェック（問260の前に）</h4>
+  <p>Q1. 化合物中のHの酸化数は？</p>
+  <p>Q2. 化合物中のOの酸化数は？</p>
+  <p>Q3. 化合物全体の酸化数の合計は？</p>
+  <button class="hint-btn" onclick="toggleHint(this);h()">ヒント</button>
+  <div class="hint-box">Q1. +1　Q2. −2　Q3. 0（イオンなら電荷と同じ）</div>
+</div>
+
+<div class="qcard">
+  <div class="qhd" onclick="h()"><span class="qnum">問260</span><h3>酸化数の決定</h3></div>
+  <div class="qbd">
+    <p>次の下線部の原子の酸化数を求めよ。</p>
+    <p>(1) <u>Na</u>₂O　(2) <u>N</u>H₃　(3) H₂<u>S</u>O₄</p>
+    <p>(4) K<u>Mn</u>O₄　(5) <u>Cr</u>₂O₇²⁻</p>
+    <div class="memo"><textarea placeholder="メモ..." onclick="h()"></textarea></div>
+    <button class="ans-btn" onclick="toggleK(this);hc()">解説を見る</button>
+    <div class="kai">
+      <div class="stp"><strong>(1) Na₂O</strong>: 2x+(−2)=0 → x = <strong>+1</strong></div>
+      <div class="stp"><strong>(2) NH₃</strong>: x+3(+1)=0 → x = <strong>−3</strong></div>
+      <div class="stp"><strong>(3) H₂SO₄</strong>: 2(+1)+x+4(−2)=0 → 2+x−8=0 → x = <strong>+6</strong></div>
+      <div class="stp"><strong>(4) KMnO₄</strong>: (+1)+x+4(−2)=0 → 1+x−8=0 → x = <strong>+7</strong></div>
+      <div class="stp"><strong>(5) Cr₂O₇²⁻</strong>: 2x+7(−2)=−2 → 2x−14=−2 → x = <strong>+6</strong></div>
+      <div class="ans-final">方程式を立てるだけ！ 化合物=0、イオン=電荷</div>
     </div>
-
-    <div class="step">
-      <strong>(1)</strong><br>
-      H₂ : O₂ = 2 : 1<br>
-      H₂ 4mol のとき O₂ = 4 × (1/2) = <strong>2 mol</strong>
-    </div>
-
-    <div class="step">
-      <strong>(2)</strong><br>
-      H₂ 8g → mol: 8 ÷ 2 = 4mol<br>
-      H₂ : H₂O = 2 : 2 = 1 : 1 なので H₂O も 4mol<br>
-      H₂O 4mol → g: 4 × 18 = <strong>72 g</strong>
-    </div>
-
-    <div class="step">
-      <strong>(3)</strong><br>
-      O₂ 11.2L → mol: 11.2 ÷ 22.4 = 0.5mol<br>
-      H₂ : O₂ = 2 : 1 → H₂ = 0.5 × 2 = 1mol<br>
-      H₂ 1mol → L: 1 × 22.4 = <strong>22.4 L</strong>
-    </div>
-
-    <div class="answer">答え：(1) 2mol (2) 72g (3) 22.4L</div>
   </div>
 </div>
 
-<!-- 問題171 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 171</span> 溶液の濃度</h3>
-  <p>次の問いに答えよ。</p>
-  <p>(1) 食塩 20g を水 180g に溶かした。質量パーセント濃度を求めよ。</p>
-  <p>(2) 密度 1.2 g/cm³ の 10% 塩酸のモル濃度を求めよ。（HCl=36.5）</p>
+</div><!-- /O4 -->
 
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
+<!-- SEC 5 -->
+<div class="sc hidden" id="O5">
 
-    <div class="step">
-      <strong>(1)</strong><br>
-      質量パーセント濃度 = 溶質/溶液 × 100<br>
-      溶液 = 溶質 + 溶媒 = 20 + 180 = 200g<br>
-      濃度 = 20/200 × 100 = <strong>10%</strong>
+<div class="pre-quiz">
+  <h4>前提チェック（問261の前に）</h4>
+  <p>Q1. 電池：___極で酸化、___極で還元</p>
+  <p>Q2. 電気分解：___極で酸化、___極で還元</p>
+  <p>Q3. ZnとCuではどちらがイオン化傾向が大きい？</p>
+  <p>Q4. 電子1molの電気量は？</p>
+  <button class="hint-btn" onclick="toggleHint(this);h()">ヒント</button>
+  <div class="hint-box">Q1. 負極で酸化（ぼさん）、正極で還元<br>Q2. 陽極で酸化（ようさん）、陰極で還元<br>Q3. Zn（だからZnが負極）<br>Q4. 96500 C</div>
+</div>
+
+<div class="qcard">
+  <div class="qhd" onclick="h()"><span class="qnum">問261</span><h3>電池と電気分解</h3></div>
+  <div class="qbd">
+    <p>(1) ダニエル電池について、負極・正極の反応をそれぞれ書け。素材：Zn板とCu板、ZnSO₄水溶液とCuSO₄水溶液。</p>
+    <p>(2) 塩化銅(II) CuCl₂水溶液を炭素電極で電気分解した。陽極と陰極で起こる反応を書け。</p>
+    <p>(3) 0.50A の電流を 965秒間流したとき、陰極に析出する銅は何gか。(Cu=64)</p>
+    <div class="memo"><textarea placeholder="メモ..." onclick="h()"></textarea></div>
+    <button class="ans-btn" onclick="toggleK(this);hc()">解説を見る</button>
+    <div class="kai">
+      <div class="stp"><strong>(1) ダニエル電池</strong><br>イオン化傾向 Zn>Cu → Znが負極<br>負極: Zn → Zn²⁺ + 2e⁻（酸化、Znが溶ける）<br>正極: Cu²⁺ + 2e⁻ → Cu（還元、Cuが析出）</div>
+      <div class="stp"><strong>(2) CuCl₂の電気分解</strong><br>陰極: Cu²⁺ + 2e⁻ → Cu（銅が析出）<br>陽極: 2Cl⁻ → Cl₂ + 2e⁻（塩素ガス発生）</div>
+      <div class="stp"><strong>(3)</strong><br>Q = It = 0.50×965 = 482.5 C<br>電子のmol = 482.5÷96500 = 0.005 mol<br>Cu²⁺+2e⁻→Cu → Cu = 0.005÷2 = 0.0025 mol<br>質量 = 0.0025×64 = <strong>0.16 g</strong></div>
+      <div class="ans-final">電池「ぼさん」負極で酸化 / 電気分解「ようさん」陽極で酸化</div>
     </div>
-
-    <div class="step">
-      <strong>(2) 密度→モル濃度の変換（超頻出！）</strong><br>
-      溶液1Lを考える（= 1000 cm³）<br>
-      質量 = 1000 × 1.2 = 1200g<br>
-      溶質(HCl)の質量 = 1200 × 0.10 = 120g<br>
-      mol = 120 ÷ 36.5 ≈ 3.29 mol<br>
-      → モル濃度 ≈ <strong>3.29 mol/L</strong>
-    </div>
-
-    <div class="point">
-      <h4>密度→モル濃度の公式</h4>
-      モル濃度 = (1000 × 密度 × 質量パーセント/100) ÷ モル質量<br>
-      = <strong>1000dw / (100M)</strong> = <strong>10dw / M</strong>
-    </div>
-
-    <div class="answer">答え：(1) 10% (2) 約3.29 mol/L</div>
   </div>
 </div>
 
-</div><!-- /chem3 -->
+</div><!-- /O5 -->
 
-<!-- ============================================ -->
-<!-- 化学：酸化還元・電池 -->
-<!-- ============================================ -->
-<div id="chem4" class="section hidden">
+<!-- SEC 6 -->
+<div class="sc hidden" id="O6">
 
-<h2>化学基礎 酸化還元・電池・電気分解</h2>
-<div class="section-intro">
-  酸化還元は電子の動きに注目！「酸化数」を使いこなせば怖くない。
+<div class="pre-quiz">
+  <h4>前提チェック（結晶・気体の前に）</h4>
+  <p>Q1. 頂点の原子は何個分で数える？</p>
+  <p>Q2. 面の原子は何個分？</p>
+  <p>Q3. 27℃ は何K？</p>
+  <button class="hint-btn" onclick="toggleHint(this);h()">ヒント</button>
+  <div class="hint-box">Q1. 1/8個分　Q2. 1/2個分　Q3. 27+273=300K</div>
 </div>
 
-<div class="formula-box">
-  <h3>酸化還元の超重要ルール</h3>
-
-  <div class="formula">酸化 = 電子を失う = 酸化数が増える</div>
-  <div class="formula">還元 = 電子を得る = 酸化数が減る</div>
-  <div class="explain">→ 「酸化されたやつが還元剤」「還元されたやつが酸化剤」（逆に覚えないで！）</div>
-
-  <div class="formula">酸化数のルール：<br>
-  ① 単体 = 0　② H = +1（金属水素化物は−1）<br>
-  ③ O = −2（過酸化物は−1）　④ 化合物全体 = 0　⑤ イオン = 電荷</div>
-
-  <div class="formula">電池：負極で酸化、正極で還元</div>
-  <div class="explain">→ 負極から電子が出ていく。イオン化傾向が大きい方が負極。</div>
-
-  <div class="formula">電気分解：陽極で酸化、陰極で還元</div>
-  <div class="explain">→ 電池の逆！外部から電気を流して無理やり反応させる。</div>
-
-  <div class="formula">ファラデーの法則：電気量 Q = It（C）、1mol電子 = 96500C</div>
-</div>
-
-<!-- 問題260 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 260</span> 酸化数の決定</h3>
-  <p>次の下線部の原子の酸化数を求めよ。</p>
-  <p>(1) <u>N</u>a₂O　(2) <u>N</u>H₃　(3) H₂<u>S</u>O₄　(4) K<u>Mn</u>O₄　(5) <u>Cr</u>₂O₇²⁻</p>
-
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>解き方</strong><br>
-      「化合物全体の酸化数の合計 = 0（イオンなら電荷）」を方程式にする！
+<div class="qcard">
+  <div class="qhd" onclick="h()"><span class="qnum">問202,203</span><h3>結晶構造</h3></div>
+  <div class="qbd">
+    <p>(1) 体心立方格子の単位格子に含まれる原子の数を求めよ。</p>
+    <p>(2) 面心立方格子の単位格子に含まれる原子の数を求めよ。</p>
+    <p>(3) 面心立方格子の一辺の長さが a cm、原子量が M、アボガドロ定数が Nₐ のとき、結晶の密度を求めよ。</p>
+    <div class="memo"><textarea placeholder="メモ..." onclick="h()"></textarea></div>
+    <button class="ans-btn" onclick="toggleK(this);hc()">解説を見る</button>
+    <div class="kai">
+      <div class="stp"><strong>(1)</strong> 頂点8×(1/8)+体心1 = <strong>2個</strong></div>
+      <div class="stp"><strong>(2)</strong> 頂点8×(1/8)+面心6×(1/2) = <strong>4個</strong></div>
+      <div class="stp"><strong>(3)</strong> 原子4個 = 4/Nₐ mol<br>質量 = 4M/Nₐ (g)<br>体積 = a³ (cm³)<br>密度 = <strong>4M/(Nₐ·a³)</strong> g/cm³</div>
     </div>
-
-    <div class="step">
-      <strong>(1) Na₂O</strong><br>
-      Na₂O: Na(x)×2 + O(−2) = 0<br>
-      2x − 2 = 0 → x = <strong>+1</strong>
-    </div>
-
-    <div class="step">
-      <strong>(2) NH₃</strong><br>
-      N(x) + H(+1)×3 = 0<br>
-      x + 3 = 0 → x = <strong>−3</strong>
-    </div>
-
-    <div class="step">
-      <strong>(3) H₂SO₄</strong><br>
-      H(+1)×2 + S(x) + O(−2)×4 = 0<br>
-      2 + x − 8 = 0 → x = <strong>+6</strong>
-    </div>
-
-    <div class="step">
-      <strong>(4) KMnO₄</strong><br>
-      K(+1) + Mn(x) + O(−2)×4 = 0<br>
-      1 + x − 8 = 0 → x = <strong>+7</strong>
-    </div>
-
-    <div class="step">
-      <strong>(5) Cr₂O₇²⁻</strong><br>
-      Cr(x)×2 + O(−2)×7 = −2（イオンだから電荷 = −2）<br>
-      2x − 14 = −2 → 2x = 12 → x = <strong>+6</strong>
-    </div>
-
-    <div class="answer">答え：(1) +1 (2) −3 (3) +6 (4) +7 (5) +6</div>
   </div>
 </div>
 
-<!-- 問題261 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 261</span> 電池と電気分解</h3>
-  <p>(1) ダニエル電池について、負極・正極の反応をそれぞれ書け。素材：Zn板とCu板、ZnSO₄水溶液とCuSO₄水溶液</p>
-  <p>(2) 塩化銅(II) CuCl₂水溶液を炭素電極で電気分解した。陽極と陰極で起こる反応を書け。</p>
-  <p>(3) 0.50A の電流を 965秒間流したとき、陰極に析出する銅は何gか。（Cu=64）</p>
-
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>(1) ダニエル電池</strong><br>
-      イオン化傾向：Zn > Cu なので Zn が負極<br>
-      <strong>負極（Zn板）：</strong>Zn → Zn²⁺ + 2e⁻（酸化）<br>
-      <strong>正極（Cu板）：</strong>Cu²⁺ + 2e⁻ → Cu（還元）<br>
-      → Znが溶けて、Cuが析出する！
+<div class="qcard">
+  <div class="qhd" onclick="h()"><span class="qnum">問210</span><h3>気体の状態方程式</h3></div>
+  <div class="qbd">
+    <p>R = 8.3×10³ Pa·L/(mol·K)</p>
+    <p>(1) 27℃、1.0×10⁵ Pa で 8.3L の気体は何molか。</p>
+    <p>(2) 酸素 O₂ 6.4g を 27℃ で 5.0L の容器に入れたときの圧力を求めよ。(O=16)</p>
+    <div class="memo"><textarea placeholder="メモ..." onclick="h()"></textarea></div>
+    <button class="ans-btn" onclick="toggleK(this);hc()">解説を見る</button>
+    <div class="kai">
+      <div class="stp"><strong>27℃ → 300K（+273！）</strong></div>
+      <div class="stp"><strong>(1)</strong> n = PV/(RT)<br>= (1.0×10⁵ × 8.3)/(8.3×10³ × 300)<br>= 830000/2490000<br>= <strong>1/3 ≈ 0.33 mol</strong></div>
+      <div class="stp"><strong>(2)</strong> O₂=32g/mol → 6.4÷32=0.2mol<br>P = nRT/V<br>= (0.2×8.3×10³×300)/5.0<br>= 498000/5<br>= <strong>9.96×10⁴ ≈ 1.0×10⁵ Pa</strong></div>
+      <div class="ans-final">PV=nRT → 求めたいものを左辺に！温度はK！</div>
     </div>
-
-    <div class="step">
-      <strong>(2) CuCl₂水溶液の電気分解</strong><br>
-      <strong>陰極：</strong>Cu²⁺ + 2e⁻ → Cu（銅が析出）<br>
-      <strong>陽極：</strong>2Cl⁻ → Cl₂ + 2e⁻（塩素ガスが発生）
-    </div>
-
-    <div class="step">
-      <strong>(3) ファラデーの法則で計算</strong><br>
-      Q = It = 0.50 × 965 = 482.5 C<br>
-      電子のmol = 482.5 ÷ 96500 = 0.005 mol<br>
-      Cu²⁺ + 2e⁻ → Cu より、Cu = 0.005 ÷ 2 = 0.0025 mol<br>
-      質量 = 0.0025 × 64 = <strong>0.16 g</strong>
-    </div>
-
-    <div class="point">
-      <h4>電池 vs 電気分解の覚え方</h4>
-      ・電池は「ぼ（負）さん（酸化）」→ 負極で酸化<br>
-      ・電気分解は「よう（陽）さん（酸化）」→ 陽極で酸化<br>
-      → 電池と電気分解では酸化する極が逆！
-    </div>
-
-    <div class="answer">答え：(1) 上記参照 (2) 上記参照 (3) 0.16g</div>
   </div>
 </div>
 
-</div><!-- /chem4 -->
+</div><!-- /O6 -->
 
-<!-- ============================================ -->
-<!-- 化学：結晶・気体 -->
-<!-- ============================================ -->
-<div id="chem5" class="section hidden">
+</div><!-- /modeO -->
 
-<h2>化学 結晶構造・気体の法則</h2>
-<div class="section-intro">
-  結晶構造の計算と気体の状態方程式は芝浦工大でよく出る！
-</div>
-
-<div class="formula-box">
-  <h3>結晶構造の公式</h3>
-
-  <div class="formula">体心立方格子：含まれる原子数 = 2個<br>
-  配位数 = 8、充填率 = 68%</div>
-
-  <div class="formula">面心立方格子：含まれる原子数 = 4個<br>
-  配位数 = 12、充填率 = 74%</div>
-
-  <div class="formula">六方最密構造：含まれる原子数 = 2個<br>
-  配位数 = 12、充填率 = 74%</div>
-
-  <div class="explain">
-    数え方のコツ：<br>
-    ・頂点の原子 → 1/8個分（8つの格子で共有）<br>
-    ・辺の原子 → 1/4個分<br>
-    ・面の原子 → 1/2個分<br>
-    ・体内の原子 → 1個分
-  </div>
-</div>
-
-<div class="formula-box">
-  <h3>気体の法則</h3>
-
-  <div class="formula">理想気体の状態方程式：PV = nRT</div>
-  <div class="explain">P=圧力(Pa), V=体積(L), n=mol, R=8.31(気体定数), T=絶対温度(K)<br>
-  T(K) = t(℃) + 273</div>
-
-  <div class="formula">ボイルの法則：P₁V₁ = P₂V₂（温度一定）</div>
-  <div class="formula">シャルルの法則：V₁/T₁ = V₂/T₂（圧力一定）</div>
-  <div class="formula">ボイル・シャルルの法則：P₁V₁/T₁ = P₂V₂/T₂</div>
-</div>
-
-<!-- 問題202, 203 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 202, 203</span> 結晶構造</h3>
-  <p>(1) 体心立方格子の単位格子に含まれる原子の数を求めよ。</p>
-  <p>(2) 面心立方格子の単位格子に含まれる原子の数を求めよ。</p>
-  <p>(3) 面心立方格子の一辺の長さが a cm、原子量が M、アボガドロ定数が Nₐ のとき、結晶の密度を求めよ。</p>
-
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>(1) 体心立方格子</strong><br>
-      頂点：8個 × 1/8 = 1個<br>
-      体心：1個 × 1 = 1個<br>
-      合計 = <strong>2個</strong>
-    </div>
-
-    <div class="step">
-      <strong>(2) 面心立方格子</strong><br>
-      頂点：8個 × 1/8 = 1個<br>
-      面心：6個 × 1/2 = 3個<br>
-      合計 = <strong>4個</strong>
-    </div>
-
-    <div class="step">
-      <strong>(3) 密度の計算</strong><br>
-      単位格子の体積 = a³ cm³<br>
-      含まれる原子 = 4個 = 4/Nₐ mol<br>
-      質量 = (4/Nₐ) × M = 4M/Nₐ (g)<br>
-      密度 = 質量/体積 = <strong>4M / (Nₐ × a³)</strong> g/cm³
-    </div>
-
-    <div class="answer">答え：(1) 2個 (2) 4個 (3) 4M/(Nₐa³) g/cm³</div>
-  </div>
-</div>
-
-<!-- 問題210 -->
-<div class="mondai">
-  <h3><span class="mondai-num">問題 210</span> 気体の状態方程式</h3>
-  <p>次の問いに答えよ。R = 8.3×10³ Pa·L/(mol·K)</p>
-  <p>(1) 27℃、1.0×10⁵ Pa で 8.3L の気体は何molか。</p>
-  <p>(2) 酸素O₂ 6.4g を 27℃で 5.0L の容器に入れたときの圧力を求めよ。（O=16）</p>
-
-  <button class="toggle-btn" onclick="toggleKaisetsu(this)">解説を見る</button>
-  <div class="kaisetsu hidden">
-    <h4>解説</h4>
-
-    <div class="step">
-      <strong>まず温度をケルビンに変換！</strong><br>
-      27℃ → 27 + 273 = 300 K
-    </div>
-
-    <div class="step">
-      <strong>(1) PV = nRT → n = PV/(RT)</strong><br>
-      n = (1.0×10⁵ × 8.3) / (8.3×10³ × 300)<br>
-      = 8.3×10⁵ / (2.49×10⁶)<br>
-      = <strong>1/3 ≈ 0.33 mol</strong>
-    </div>
-
-    <div class="step">
-      <strong>(2) まずmolを求める</strong><br>
-      O₂のモル質量 = 32 g/mol<br>
-      n = 6.4 ÷ 32 = 0.2 mol<br><br>
-      PV = nRT → P = nRT/V<br>
-      P = (0.2 × 8.3×10³ × 300) / 5.0<br>
-      = (0.2 × 2490000) / 5.0<br>
-      = 498000 / 5.0<br>
-      = <strong>9.96×10⁴ ≈ 1.0×10⁵ Pa</strong>
-    </div>
-
-    <div class="point">
-      <h4>PV=nRT 使い方3ステップ</h4>
-      ① 温度は必ず K（ケルビン）に直す！ +273を忘れるな<br>
-      ② 求めたいものを左辺に持ってくる<br>
-      ③ 単位を揃える（Pa, L, mol, K）
-    </div>
-
-    <div class="answer">答え：(1) 1/3 mol (2) 約1.0×10⁵ Pa</div>
-  </div>
-</div>
-
-</div><!-- /chem5 -->
-
-</div><!-- /container -->
+</div><!-- /wrap -->
 
 <script>
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+let mode='I', sec='1'
+
+function swMode(m){
+  try{h()}catch(e){}
+  mode=m
+  document.getElementById('modeI').classList.toggle('hidden',m!=='I')
+  document.getElementById('modeO').classList.toggle('hidden',m!=='O')
+  document.getElementById('mbI').classList.toggle('on',m==='I')
+  document.getElementById('mbO').classList.toggle('on',m==='O')
+  showSec()
 }
 
-function toggleKaisetsu(btn) {
-  const k = btn.nextElementSibling;
-  if (k.classList.contains('hidden')) {
-    k.classList.remove('hidden');
-    btn.textContent = '解説を閉じる';
-  } else {
-    k.classList.add('hidden');
-    btn.textContent = '解説を見る';
-  }
+function swSec(s,btn){
+  try{h()}catch(e){}
+  sec=s
+  document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('on'))
+  btn.classList.add('on')
+  showSec()
+  updateProgress()
 }
+
+function showSec(){
+  document.querySelectorAll('.sc').forEach(el=>el.classList.add('hidden'))
+  const el=document.getElementById(mode+sec)
+  if(el)el.classList.remove('hidden')
+}
+
+function toggleK(btn){
+  const k=btn.nextElementSibling
+  const show=k.classList.toggle('show')
+  btn.textContent=show?'解説を閉じる':'解説を見る'
+  if(show) updateProgress()
+}
+
+function toggleHint(btn){
+  const box=btn.nextElementSibling
+  box.classList.toggle('show')
+  btn.textContent=box.classList.contains('show')?'閉じる':'ヒント'
+}
+
+// 読み上げ
+let curBtn=null
+function sp(id,btn){
+  try{h()}catch(e){}
+  if(speechSynthesis.speaking){
+    speechSynthesis.cancel()
+    if(curBtn){curBtn.classList.remove('on');curBtn.textContent='読み上げ 1.2x'}
+    if(curBtn===btn){curBtn=null;return}
+  }
+  const el=document.getElementById(id)
+  if(!el)return
+  const u=new SpeechSynthesisUtterance(el.innerText)
+  u.lang='ja-JP';u.rate=1.2
+  btn.classList.add('on');btn.textContent='■ 停止';curBtn=btn
+  u.onend=()=>{
+    btn.classList.remove('on');btn.textContent='読み上げ 1.2x';curBtn=null
+    try{hc()}catch(e){}
+  }
+  speechSynthesis.speak(u)
+}
+
+// 進捗
+function updateProgress(){
+  const total=document.querySelectorAll('#modeO .kai').length
+  const done=document.querySelectorAll('#modeO .kai.show').length
+  const pct=total?Math.round(done/total*100):0
+  document.getElementById('pbar').style.width=pct+'%'
+}
+
+// DAY表示
+const d=new Date()
+document.getElementById('dayTag').textContent=
+  d.getHours()<15?'DAY 1 / 2（午前: INPUT集中）':'DAY 1 / 2（午後: OUTPUT演習）'
+
+// 全タップにhaptic
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('button,.qhd,textarea').forEach(el=>{
+    el.addEventListener('touchstart',()=>{try{h()}catch(e){}},{passive:true})
+  })
+})
 </script>
 
 </body>
